@@ -11,22 +11,36 @@ function addEmbed() {
     embedDiv.className = 'embed';
 
     embedDiv.innerHTML = `
+        <label>Auteur:</label>
+        <input type="text" class="embedAuthor">
+        <label>URL de l'auteur:</label>
+        <input type="url" class="embedAuthorUrl">
+        <label>Icon URL de l'auteur:</label>
+        <input type="url" class="embedAuthorIconUrl">
+        
         <label>Titre:</label>
         <input type="text" class="embedTitle">
         <label>Description:</label>
         <textarea class="embedDescription"></textarea>
+        <label>URL:</label>
+        <input type="url" class="embedUrl">
         <label>Couleur:</label>
-        <input type="text" class="embedColor" value="5814783">
-        <label>Auteur:</label>
-        <input type="text" class="embedAuthor">
-        <label>Footer:</label>
-        <input type="text" class="embedFooter">
-        <label>Timestamp:</label>
-        <input type="datetime-local" class="embedTimestamp">
+        <input type="color" class="embedColor" value="#58b9ff">
+        
         <div class="fieldsContainer">
             <h3>Fields</h3>
             <button type="button" class="addFieldBtn">Ajouter un Field</button>
         </div>
+        
+        <label>Image URL:</label>
+        <input type="url" class="embedImageUrl">
+        <label>Thumbnail URL:</label>
+        <input type="url" class="embedThumbnailUrl">
+        
+        <label>Footer:</label>
+        <input type="text" class="embedFooter">
+        <label>Timestamp:</label>
+        <input type="datetime-local" class="embedTimestamp">
     `;
 
     embedsContainer.appendChild(embedDiv);
@@ -52,14 +66,20 @@ function addField(e) {
 function sendWebhook() {
     const url = document.getElementById('webhookUrl').value;
     const username = document.getElementById('username').value;
+    const avatarUrl = document.getElementById('avatarUrl').value;
     const content = document.getElementById('content').value;
     const threadName = document.getElementById('threadName').value;
 
     const embeds = Array.from(document.querySelectorAll('.embed')).map(embedDiv => {
+        const author = embedDiv.querySelector('.embedAuthor').value;
+        const authorUrl = embedDiv.querySelector('.embedAuthorUrl').value;
+        const authorIconUrl = embedDiv.querySelector('.embedAuthorIconUrl').value;
         const title = embedDiv.querySelector('.embedTitle').value;
         const description = embedDiv.querySelector('.embedDescription').value;
+        const url = embedDiv.querySelector('.embedUrl').value;
         const color = embedDiv.querySelector('.embedColor').value;
-        const author = embedDiv.querySelector('.embedAuthor').value;
+        const imageUrl = embedDiv.querySelector('.embedImageUrl').value;
+        const thumbnailUrl = embedDiv.querySelector('.embedThumbnailUrl').value;
         const footer = embedDiv.querySelector('.embedFooter').value;
         const timestamp = embedDiv.querySelector('.embedTimestamp').value;
 
@@ -71,22 +91,28 @@ function sendWebhook() {
         });
 
         const embed = {};
+        if (author) embed.author = { name: author, url: authorUrl, icon_url: authorIconUrl };
         if (title) embed.title = title;
         if (description) embed.description = description;
-        if (color) embed.color = parseInt(color);
-        if (author) embed.author = { name: author };
+        if (url) embed.url = url;
+        if (color) embed.color = parseInt(color.replace('#', ''), 16);
+        if (imageUrl) embed.image = { url: imageUrl };
+        if (thumbnailUrl) embed.thumbnail = { url: thumbnailUrl };
         if (footer) embed.footer = { text: footer };
         if (timestamp) embed.timestamp = new Date(timestamp).toISOString();
-        if (fields.length) embed.fields = fields;
+        if (fields.length > 0) embed.fields = fields;
 
         return embed;
     });
 
     const payload = {};
     if (username) payload.username = username;
+    if (avatarUrl) payload.avatar_url = avatarUrl;
     if (content) payload.content = content;
-    if (embeds.length) payload.embeds = embeds;
+    if (embeds.length > 0) payload.embeds = embeds;
     if (threadName) payload.thread_name = threadName;
+
+    console.log('Payload:', JSON.stringify(payload, null, 2));
 
     fetch(url, {
         method: 'POST',
@@ -98,10 +124,13 @@ function sendWebhook() {
         if (response.ok) {
             alert('Webhook envoyé avec succès !');
         } else {
-            alert('Erreur lors de l\'envoi du webhook.');
+            response.text().then(text => {
+                console.error('Erreur:', text);
+                alert('Erreur lors de l\'envoi du webhook : ' + text);
+            });
         }
     }).catch(error => {
         console.error('Erreur:', error);
-        alert('Erreur lors de l\'envoi du webhook.');
+        alert('Erreur lors de l\'envoi du webhook : ' + error.message);
     });
 }

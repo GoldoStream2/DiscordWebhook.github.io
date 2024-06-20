@@ -1,22 +1,24 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #2f3136;
+    color: #dcddde;
     margin: 0;
     padding: 0;
 }
 
 .container {
-    width: 50%;
+    width: 60%;
     margin: auto;
-    background: #fff;
+    background: #36393f;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     margin-top: 50px;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #7289da;
 }
 
 form {
@@ -26,25 +28,35 @@ form {
 
 label {
     margin: 10px 0 5px;
-    color: #555;
+    color: #b9bbbe;
 }
 
 input, textarea, button {
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #4f545c;
     border-radius: 5px;
+    background-color: #40444b;
+    color: #dcddde;
+}
+
+textarea {
+    resize: vertical;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #7289da;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #677bc4;
+}
+
+.section {
+    margin-top: 20px;
 }
 
 #embedsContainer {
@@ -52,8 +64,13 @@ button:hover {
 }
 
 .embed {
-    border: 1px solid #ddd;
+    border: 1px solid #4f545c;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #2f3136;
+}
+
+.field {
     margin-bottom: 10px;
 }

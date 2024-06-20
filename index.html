@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Sender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Envoyer un Webhook sur Discord</h1>
+        <form id="webhookForm">
+            <label for="webhookUrl">URL du Webhook:</label>
+            <input type="url" id="webhookUrl" required>
+
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username">
+
+            <label for="content">Contenu:</label>
+            <textarea id="content"></textarea>
+
+            <div id="embedsContainer">
+                <h2>Embeds</h2>
+                <button type="button" id="addEmbedBtn">Ajouter un Embed</button>
+            </div>
+
+            <label for="threadName">Nom du fil:</label>
+            <input type="text" id="threadName">
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

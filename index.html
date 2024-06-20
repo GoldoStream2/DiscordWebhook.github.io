@@ -13,30 +13,29 @@
             <label for="webhookUrl">URL du Webhook:</label>
             <input type="url" id="webhookUrl" required>
 
-            <div class="section">
-                <h2>Profil</h2>
-                <label for="username">Nom d'utilisateur:</label>
-                <input type="text" id="username">
-                <label for="avatarUrl">URL de l'avatar:</label>
-                <input type="url" id="avatarUrl">
+            <div class="dropdown">
+                <div class="dropdown-toggle" id="profileToggle">
+                    > Profil
+                </div>
+                <div class="dropdown-menu" id="profileMenu">
+                    <label for="username">Nom d'utilisateur:</label>
+                    <input type="text" id="username">
+
+                    <label for="avatarUrl">URL de l'avatar:</label>
+                    <input type="url" id="avatarUrl">
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Message</h2>
-                <label for="content">Contenu:</label>
-                <textarea id="content"></textarea>
-            </div>
+            <label for="content">Contenu:</label>
+            <textarea id="content" rows="4"></textarea>
 
-            <div class="section" id="embedsContainer">
+            <div id="embedsContainer">
                 <h2>Embeds</h2>
                 <button type="button" id="addEmbedBtn">Ajouter un Embed</button>
             </div>
 
-            <div class="section">
-                <h2>Fil</h2>
-                <label for="threadName">Nom du fil:</label>
-                <input type="text" id="threadName">
-            </div>
+            <label for="threadName">Nom du fil:</label>
+            <input type="text" id="threadName">
 
             <button type="submit">Envoyer</button>
         </form>

@@ -5,6 +5,17 @@ document.getElementById('webhookForm').addEventListener('submit', function (e) {
     sendWebhook();
 });
 
+document.getElementById('profileToggle').addEventListener('click', function () {
+    const profileMenu = document.getElementById('profileMenu');
+    if (profileMenu.style.display === 'none' || profileMenu.style.display === '') {
+        profileMenu.style.display = 'block';
+        this.textContent = 'v Profil'; // Change to down arrow
+    } else {
+        profileMenu.style.display = 'none';
+        this.textContent = '> Profil'; // Change to right arrow
+    }
+});
+
 function addEmbed() {
     const embedsContainer = document.getElementById('embedsContainer');
     const embedDiv = document.createElement('div');
@@ -65,6 +76,11 @@ function addField(e) {
 
 function sendWebhook() {
     const url = document.getElementById('webhookUrl').value;
+    if (!isValidUrl(url)) {
+        alert('L\'URL du webhook est invalide.');
+        return;
+    }
+
     const username = document.getElementById('username').value;
     const avatarUrl = document.getElementById('avatarUrl').value;
     const content = document.getElementById('content').value;
@@ -76,7 +92,7 @@ function sendWebhook() {
         const authorIconUrl = embedDiv.querySelector('.embedAuthorIconUrl').value;
         const title = embedDiv.querySelector('.embedTitle').value;
         const description = embedDiv.querySelector('.embedDescription').value;
-        const url = embedDiv.querySelector('.embedUrl').value;
+        const embedUrl = embedDiv.querySelector('.embedUrl').value;
         const color = embedDiv.querySelector('.embedColor').value;
         const imageUrl = embedDiv.querySelector('.embedImageUrl').value;
         const thumbnailUrl = embedDiv.querySelector('.embedThumbnailUrl').value;
@@ -94,7 +110,7 @@ function sendWebhook() {
         if (author) embed.author = { name: author, url: authorUrl, icon_url: authorIconUrl };
         if (title) embed.title = title;
         if (description) embed.description = description;
-        if (url) embed.url = url;
+        if (embedUrl) embed.url = embedUrl;
         if (color) embed.color = parseInt(color.replace('#', ''), 16);
         if (imageUrl) embed.image = { url: imageUrl };
         if (thumbnailUrl) embed.thumbnail = { url: thumbnailUrl };
@@ -117,20 +133,4 @@ function sendWebhook() {
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    }).then(response => {
-        if (response.ok) {
-            alert('Webhook envoyé avec succès !');
-        } else {
-            response.text().then(text => {
-                console.error('Erreur:', text);
-                alert('Erreur lors de l\'envoi du webhook : ' + text);
-            });
-        }
-    }).catch(error => {
-        console.error('Erreur:', error);
-        alert('Erreur lors de l\'envoi du webhook : ' + error.message);
-    });
-}
+            'Content-Type': '

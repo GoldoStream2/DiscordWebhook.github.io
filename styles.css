@@ -1,43 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #2f3136;
-    color: #dcddde;
+    background-color: #2c2f33;
+    color: #ffffff;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-    width: 60%;
-    margin: auto;
-    background: #36393f;
+    background-color: #23272a;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-top: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
 }
 
 h1 {
     text-align: center;
-    color: #7289da;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
 }
 
 label {
-    margin: 10px 0 5px;
-    color: #b9bbbe;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-input, textarea, button {
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%;
     padding: 10px;
+    margin-top: 5px;
     margin-bottom: 10px;
-    border: 1px solid #4f545c;
-    border-radius: 5px;
-    background-color: #40444b;
-    color: #dcddde;
+    border: none;
+    border-radius: 4px;
 }
 
 textarea {
@@ -45,32 +45,51 @@ textarea {
 }
 
 button {
-    background-color: #7289da;
-    color: white;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
     border: none;
+    border-radius: 4px;
+    background-color: #7289da;
+    color: #ffffff;
     cursor: pointer;
+    font-size: 14px;
 }
 
 button:hover {
-    background-color: #677bc4;
+    background-color: #5b6eae;
 }
 
-.section {
-    margin-top: 20px;
+.dropdown {
+    margin-top: 10px;
 }
 
-#embedsContainer {
-    margin-top: 20px;
+.dropdown-toggle {
+    cursor: pointer;
+    font-weight: bold;
+    color: #7289da;
+}
+
+.dropdown-menu {
+    display: none;
+    margin-top: 10px;
+}
+
+.dropdown-menu label {
+    margin-top: 5px;
+}
+
+#content {
+    height: 100px; /* Adjusted size */
 }
 
 .embed {
-    border: 1px solid #4f545c;
+    border: 1px solid #4a4a4a;
     padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #2f3136;
+    margin-top: 10px;
+    border-radius: 4px;
 }
 
 .field {
-    margin-bottom: 10px;
+    margin-top: 10px;
 }

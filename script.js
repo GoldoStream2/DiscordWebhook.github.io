@@ -133,4 +133,29 @@ function sendWebhook() {
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': '
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(response => {
+        if (response.ok) {
+            alert('Webhook envoyé avec succès !');
+        } else {
+            response.text().then(text => {
+                console.error('Erreur:', text);
+                alert('Erreur lors de l\'envoi du webhook : ' + text);
+            });
+        }
+    }).catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur lors de l\'envoi du webhook : ' + error.message);
+    });
+}
+
+function isValidUrl(string) {
+    try {
+        new URL(string);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
